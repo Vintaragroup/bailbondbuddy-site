@@ -149,14 +149,23 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   <Sparkles className="h-5 w-5" />
                   <p>Ready to transform your agency? Start saving time today.</p>
                 </div>
-                <Button 
-                  variant="secondary" 
-                  size="sm"
-                  onClick={() => onNavigate('contact')}
-                >
-                  Request Demo
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button 
+                    variant="secondary" 
+                    size="sm"
+                    onClick={() => onNavigate('contact')}
+                  >
+                    Request Demo
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => (window.location.href = '/login')}
+                  >
+                    Log In
+                  </Button>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -184,6 +193,9 @@ export function HomePage({ onNavigate }: HomePageProps) {
               <Button size="lg" onClick={() => onNavigate('contact')}>
                 Request a Demo
                 <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button size="lg" variant="outline" onClick={() => (window.location.href = '/login')}>
+                Log In
               </Button>
               <Button size="lg" variant="outline" onClick={() => onNavigate('product')}>
                 See Product Overview
