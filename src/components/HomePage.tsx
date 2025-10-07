@@ -1,16 +1,15 @@
-import { Shield, MessageSquare, MapPin, Calendar, ArrowRight, CheckCircle, Zap, TrendingUp, Bell, Clock, Send, MapPinned, CheckCircle2, ChevronDown, DollarSign, TrendingDown, Sparkles, Users, BarChart3, AlertCircle, HelpCircle } from 'lucide-react';
+import { Shield, MessageSquare, MapPin, Calendar, ArrowRight, CheckCircle, Zap, TrendingUp, Bell, Clock, Sparkles, Users, BarChart3, AlertCircle, HelpCircle, ChevronDown, MapPinned, DollarSign } from 'lucide-react';
 import { Button } from './ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
-import { Avatar, AvatarFallback } from './ui/avatar';
-import { Progress } from './ui/progress';
+// import { Avatar, AvatarFallback } from './ui/avatar';
+// import { Progress } from './ui/progress';
 import { Separator } from './ui/separator';
 import { Slider } from './ui/slider';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect, useRef } from 'react';
 import { HeroVisual } from './HeroVisual';
-import { trackCTAClick } from '../utils/analytics';
 import { trackCTAClick } from '../utils/analytics';
 
 interface HomePageProps {
@@ -23,10 +22,10 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0 }
 };
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 }
-};
+// const fadeIn = {
+//   hidden: { opacity: 0 },
+//   visible: { opacity: 1 }
+// };
 
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.9 },
@@ -127,7 +126,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
   const casesPerMonth = numCases[0];
   const hoursManuallyPerCase = 0.5;
   const hourlyRate = 25;
-  const monthsSaved = Math.floor((casesPerMonth * hoursManuallyPerCase) / 40) || 0;
+  // const monthsSaved = Math.floor((casesPerMonth * hoursManuallyPerCase) / 40) || 0;
   const moneySaved = Math.floor(casesPerMonth * hoursManuallyPerCase * hourlyRate);
   const roiMultiplier = Math.floor(moneySaved / 199) || 0;
 
