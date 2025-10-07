@@ -61,7 +61,7 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
               size="lg" 
               onClick={() => (window.location.href = 'https://bail-bonds-ui-app.onrender.com/auth/login')}
             >
-              Sign in to my account
+              Log in
             </Button>
           </div>
 
@@ -109,7 +109,7 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
                   className="w-full"
                   size="lg"
                 >
-                  Sign in to my account
+                  Log in
                 </Button>
               </div>
             </nav>
