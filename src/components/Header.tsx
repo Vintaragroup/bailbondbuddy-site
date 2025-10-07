@@ -53,9 +53,16 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
+          {/* CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-2">
             <Button onClick={() => onNavigate('contact')} size="lg">Request a Demo</Button>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={() => (window.location.href = 'https://bail-bonds-ui-app.onrender.com/auth/login')}
+            >
+              Sign in to my account
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -88,13 +95,21 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
                   {item.label}
                 </button>
               ))}
-              <div className="pt-2">
+              <div className="pt-2 flex flex-col gap-2">
                 <Button 
                   onClick={() => { onNavigate('contact'); setMobileMenuOpen(false); }} 
                   className="w-full"
                   size="lg"
                 >
                   Request a Demo
+                </Button>
+                <Button 
+                  variant="outline"
+                  onClick={() => { window.location.href = 'https://bail-bonds-ui-app.onrender.com/auth/login'; setMobileMenuOpen(false); }} 
+                  className="w-full"
+                  size="lg"
+                >
+                  Sign in to my account
                 </Button>
               </div>
             </nav>
