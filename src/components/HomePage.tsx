@@ -160,7 +160,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => (window.location.href = '/login')}
+                    onClick={() => (window.location.href = 'https://bail-bonds-ui-app.onrender.com/auth/login')}
                   >
                     Log In
                   </Button>
@@ -193,7 +193,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 Request a Demo
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => (window.location.href = '/login')}>
+              <Button size="lg" variant="outline" onClick={() => (window.location.href = 'https://bail-bonds-ui-app.onrender.com/auth/login')}>
                 Log In
               </Button>
               <Button size="lg" variant="outline" onClick={() => onNavigate('product')}>
