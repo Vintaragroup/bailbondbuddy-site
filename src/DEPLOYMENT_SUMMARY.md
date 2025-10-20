@@ -333,3 +333,15 @@ All code is written, tested, and optimized. All you need to do is:
 Start with [QUICK_START.md](./QUICK_START.md) and you'll be live before lunch! 🎉
 
 **Good luck with your launch!** 🚀
+
+---
+
+## 📣 Public 10DLC Compliance URL
+
+Use this public URL when submitting your messaging program for carrier/Twilio 10DLC review:
+
+- Path: `/10dlc` (automatically redirects to the Compliance page)
+- Example (Vercel production): `https://<your-vercel-domain>/10dlc`
+- Example (with custom domain): `https://bailbondbuddy.com/10dlc`
+
+This route is accessible without login and is safe to share externally.
