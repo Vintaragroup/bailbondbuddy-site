@@ -1,4 +1,5 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useEffect, useMemo, useRef, lazy, Suspense } from 'react';
+import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { PageLoadingSkeleton } from './components/PageLoadingSkeleton';
@@ -17,7 +18,7 @@ const PrivacyPage = lazy(() => import('./components/PrivacyPage').then(m => ({ d
 const TermsPage = lazy(() => import('./components/TermsPage').then(m => ({ default: m.TermsPage })));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
-// Page metadata for SEO
+// Page metadata for SEO keyed by route key
 const pageMetadata: Record<string, { title: string; description: string }> = {
   home: {
     title: 'Bail Bond Buddy - Modern CRM for Bail Bond Agencies',
@@ -53,10 +54,47 @@ const pageMetadata: Record<string, { title: string; description: string }> = {
   },
 };
 
+// Helpers to map between paths and route keys
+const pathToKey = (path: string): string => {
+  if (path === '/' || path === '' || path === '/home') return 'home';
+  if (path === '/product') return 'product';
+  if (path === '/pricing') return 'pricing';
+  if (path === '/resources') return 'resources';
+  if (path === '/contact') return 'contact';
+  if (path === '/privacy') return 'privacy';
+  if (path === '/terms') return 'terms';
+  if (path === '/compliance' || path === '/10dlc') return 'compliance';
+  return '404';
+};
+
+const keyToPath = (key: string): string => {
+  switch (key) {
+    case 'home':
+      return '/';
+    case 'product':
+      return '/product';
+    case 'pricing':
+      return '/pricing';
+    case 'resources':
+      return '/resources';
+    case 'contact':
+      return '/contact';
+    case 'privacy':
+      return '/privacy';
+    case 'terms':
+      return '/terms';
+    case 'compliance':
+      return '/compliance';
+    default:
+      return '/404';
+  }
+};
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [previousPage, setPreviousPage] = useState('home');
-  const [isValidPage, setIsValidPage] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentPage = useMemo(() => pathToKey(location.pathname), [location.pathname]);
+  const prevPageRef = useRef<string>('home');
 
   // Initialize analytics and performance monitoring on mount
   useEffect(() => {
@@ -65,13 +103,12 @@ export default function App() {
     preloadCriticalResources();
   }, []);
 
-  // Update document title and meta description when page changes
+  // Update document title/meta and analytics on route change
   useEffect(() => {
     const metadata = pageMetadata[currentPage];
     if (metadata) {
       document.title = metadata.title;
-      
-      // Update or create meta description
+
       let metaDescription = document.querySelector('meta[name="description"]');
       if (!metaDescription) {
         metaDescription = document.createElement('meta');
@@ -79,56 +116,23 @@ export default function App() {
         document.head.appendChild(metaDescription);
       }
       metaDescription.setAttribute('content', metadata.description);
-      
-      setIsValidPage(true);
-      
-      // Track page view
+
       trackPageView(currentPage, metadata.title);
-      
-      // Track navigation (except on initial load)
-      if (previousPage !== currentPage) {
-        trackNavigation(previousPage, currentPage);
+      const prev = prevPageRef.current;
+      if (prev !== currentPage) {
+        trackNavigation(prev, currentPage);
+        prevPageRef.current = currentPage;
       }
     } else {
-      // 404 - page not found
       document.title = '404 - Page Not Found | Bail Bond Buddy';
-      setIsValidPage(false);
       trackPageView('404', '404 - Page Not Found');
     }
-  }, [currentPage, previousPage]);
+  }, [currentPage]);
 
   const handleNavigate = (page: string) => {
-    setPreviousPage(currentPage);
-    setCurrentPage(page);
+    const path = keyToPath(page);
+    navigate(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const renderPage = () => {
-    // If page is invalid, show 404
-    if (!isValidPage) {
-      return <NotFoundPage onNavigate={handleNavigate} />;
-    }
-
-    switch (currentPage) {
-      case 'home':
-        return <HomePage onNavigate={handleNavigate} />;
-      case 'product':
-        return <ProductPage onNavigate={handleNavigate} />;
-      case 'compliance':
-        return <CompliancePage onNavigate={handleNavigate} />;
-      case 'pricing':
-        return <PricingPage onNavigate={handleNavigate} />;
-      case 'contact':
-        return <ContactPage />;
-      case 'resources':
-        return <ResourcesPage onNavigate={handleNavigate} />;
-      case 'privacy':
-        return <PrivacyPage onNavigate={handleNavigate} />;
-      case 'terms':
-        return <TermsPage onNavigate={handleNavigate} />;
-      default:
-        return <NotFoundPage onNavigate={handleNavigate} />;
-    }
   };
 
   return (
@@ -136,7 +140,19 @@ export default function App() {
       <Header currentPage={currentPage} onNavigate={handleNavigate} />
       <main className="flex-1">
         <Suspense fallback={<PageLoadingSkeleton />}>
-          {renderPage()}
+          <Routes>
+            <Route path="/" element={<HomePage onNavigate={handleNavigate} />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/product" element={<ProductPage onNavigate={handleNavigate} />} />
+            <Route path="/pricing" element={<PricingPage onNavigate={handleNavigate} />} />
+            <Route path="/resources" element={<ResourcesPage onNavigate={handleNavigate} />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy" element={<PrivacyPage onNavigate={handleNavigate} />} />
+            <Route path="/terms" element={<TermsPage onNavigate={handleNavigate} />} />
+            <Route path="/compliance" element={<CompliancePage onNavigate={handleNavigate} />} />
+            <Route path="/10dlc" element={<Navigate to="/compliance" replace />} />
+            <Route path="*" element={<NotFoundPage onNavigate={handleNavigate} />} />
+          </Routes>
         </Suspense>
       </main>
       <Footer onNavigate={handleNavigate} />
