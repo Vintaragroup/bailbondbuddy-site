@@ -15,6 +15,7 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
     { label: 'Product', value: 'product' },
     { label: 'Pricing', value: 'pricing' },
     { label: 'Resources', value: 'resources' },
+    { label: '10DLC Compliance', value: 'compliance' },
     { label: 'Contact', value: 'contact' },
   ];
 
