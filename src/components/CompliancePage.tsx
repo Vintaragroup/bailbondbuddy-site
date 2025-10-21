@@ -73,7 +73,7 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
     { task: 'Message templates with carrier requirements', description: 'All messages include brand identification, STOP instructions, and proper variable formatting' },
     { task: 'Opt-in proof documentation', description: 'Screenshots and records of all consent capture mechanisms maintained' },
     { task: 'Public evidence hosting', description: 'Opt-in forms and proof materials available at public URLs for carrier verification' },
-    { task: 'Automated STOP/HELP handling', description: 'System configured for immediate opt-out processing and automated help responses' },
+    { task: 'Automated STOP/HELP handling', description: 'System configured for immediate opt-out processing. HELP replies trigger an automated message containing support contact information (email and business name).' },
     { task: 'Audit log system active', description: 'All opt-in events tracked with timestamps and stored for verification' },
     { task: 'Verbal consent collection implemented', description: 'AI agent collects and records verbal consent for all inbound call inquiries' },
     { task: 'Verbal consent logs secured', description: 'All verbal consent interactions logged with timestamps and audio recordings for carrier audit' },
@@ -217,9 +217,17 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
                   <p className="text-muted-foreground mb-3">
                     <strong className="text-foreground">Recording and Logging:</strong>
                   </p>
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground mb-3">
                     All verbal consent interactions collected by our AI agent are recorded and logged for verification purposes in compliance with carrier standards. Each consent event includes caller identification, timestamp, and audio recording of the explicit "yes" response.
                   </p>
+                  <p className="text-muted-foreground mb-3">
+                    <strong className="text-foreground">Retention:</strong> Verbal consent recordings are securely stored for a minimum of 24 months for carrier audit purposes.
+                  </p>
+                  <div className="bg-muted p-3 rounded border-l-4 border-primary mt-3">
+                    <p className="text-sm font-mono text-foreground">
+                      <strong>Example Log:</strong> Caller 832-555-0194 consented via verbal "yes" on 2025-10-20T14:32:15Z
+                    </p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -266,12 +274,14 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
                             <strong>AI Voice Consent Script Documentation:</strong>
                           </p>
                           <p className="text-sm text-muted-foreground mb-4">
-                            Our complete AI consent script with verbal disclosure language is hosted on a publicly accessible cloud storage platform for carrier verification. The full script includes all required 10DLC disclosures and is available upon request for Twilio or carrier audit purposes.
+                            Our complete AI consent script with verbal disclosure language is hosted on a publicly accessible cloud storage platform for carrier verification. The full script includes all required 10DLC disclosures.
                           </p>
-                          <Alert className="border-primary/50">
+                          <Alert className="border-primary/50 bg-primary/5">
                             <FileText className="h-4 w-4 text-primary" />
                             <AlertDescription className="text-sm">
-                              <strong>For Carrier Review:</strong> Public documentation link available. Contact our compliance team at the email below to receive the direct URL for verification purposes.
+                              <strong>View our AI Voice Consent Script here:</strong> <a href="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Public Google Drive Link</a>
+                              <br />
+                              <span className="text-muted-foreground italic mt-1 block">(Replace with your actual public Google Drive or Dropbox link set to "anyone with the link can view")</span>
                             </AlertDescription>
                           </Alert>
                         </div>
