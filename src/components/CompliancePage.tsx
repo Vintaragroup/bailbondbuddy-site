@@ -1,4 +1,4 @@
-import { Shield, CheckCircle, Upload, FileText, MessageSquare, AlertCircle } from 'lucide-react';
+import { Shield, CheckCircle, Upload, FileText, MessageSquare, AlertCircle, Mic } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
@@ -12,6 +12,7 @@ interface CompliancePageProps {
 export function CompliancePage({ onNavigate }: CompliancePageProps) {
   const whatWeProvide = [
     'Explicit opt-in capture at every touchpoint (web forms, mobile app, phone/in-person)',
+    'Verbal consent collection via AI agent for inbound calls',
     'Complete audit logs of all opt-in events with timestamps',
     'Automated STOP/HELP keyword handling',
     'Opt-out management and suppression lists',
@@ -28,7 +29,9 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
         'Photo/scan of paper consent form (for phone or in-person sign-ups)',
         'Login flow screenshot showing SMS consent checkbox',
         'Public URL hosting your opt-in form or privacy policy',
+        'AI voice consent script (publicly accessible link)',
       ],
+      hasPublicLink: true,
     },
     {
       title: 'Submit Evidence',
@@ -59,7 +62,8 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
       samples: [
         'Bail Bond Buddy: Hi [CLIENT_NAME], this is a reminder of your court date on [DATE] at [TIME]. Reply STOP to opt out, HELP for help.',
         'Bail Bond Buddy: GPS check-in required. Please complete your location verification by [TIME]. Reply STOP to unsubscribe.',
-        'Bail Bond Buddy: Your payment of $[AMOUNT] has been received. Questions? Reply HELP or call [PHONE]. Reply STOP to opt out.',
+        'Bail Bond Buddy: Your payment of $[AMOUNT] has been received. Questions? Reply HELP or contact us. Reply STOP to opt out.',
+        'Bail Bond Buddy: Hi [FIRST_NAME], there\'s an update regarding [INMATE_NAME]\'s warrant status. Reply STOP to opt out. Msg & data rates may apply. HELP for info.',
       ],
     },
   ];
@@ -72,6 +76,8 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
     { task: 'Evidence hosted publicly', description: 'Opt-in form or proof available at public URL' },
     { task: 'STOP/HELP handling configured', description: 'Automated responses and opt-out processing enabled' },
     { task: 'Audit log system verified', description: 'All opt-in events tracked with timestamps' },
+    { task: 'Verbal consent process implemented and recorded', description: 'AI calls collect and store verbal consent for inbound inquiries' },
+    { task: 'Verbal consent logs stored securely', description: 'All verbal consent interactions logged with timestamps for verification' },
   ];
 
   const faqs = [
@@ -98,6 +104,10 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
     {
       question: 'Where should I host my opt-in proof?',
       answer: 'Opt-in proof must be accessible via a public URL (no login required). You can host it on your website, use a public Google Drive/Dropbox link, or we can provide hosting as part of your Bail Bond Buddy account.',
+    },
+    {
+      question: 'What about the Privacy Policy requirement?',
+      answer: 'Your Privacy Policy must include the exact statement: "Mobile information will not be shared with third parties for marketing or promotional purposes." This clause is required by carriers for 10DLC compliance and must be publicly accessible.',
     },
   ];
 
@@ -156,6 +166,68 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
         </div>
       </section>
 
+      {/* Verbal Consent via AI Agent */}
+      <section className="bg-gradient-to-br from-accent/20 via-background to-accent/10 py-16 md:py-24 border-y">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                <Mic className="h-7 w-7 text-primary" />
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl">Verbal Consent via AI Agent</h2>
+            </div>
+            
+            <Card className="border-2 shadow-lg">
+              <CardContent className="p-8 space-y-6">
+                <p className="text-lg text-muted-foreground">
+                  When a person calls Bail Bond Buddy to inquire about a warrant, incarceration, or bond, our automated agent collects <strong className="text-foreground">verbal consent</strong> before any text message is sent.
+                </p>
+
+                <div className="bg-muted/50 border-l-4 border-primary p-6 rounded-lg">
+                  <h3 className="flex items-center gap-2 mb-4">
+                    <MessageSquare className="h-5 w-5 text-primary" />
+                    <span>Example Consent Script:</span>
+                  </h3>
+                  <blockquote className="italic text-foreground space-y-3">
+                    <p>
+                      "You may receive text messages from <strong>Bail Bond Buddy</strong> with updates about your inquiry.
+                    </p>
+                    <p>
+                      These may include information about warrants, incarceration status, or bond details.
+                    </p>
+                    <p>
+                      Message and data rates may apply. Reply STOP to opt out or HELP for information.
+                    </p>
+                    <p>
+                      Mobile information will not be shared with third parties for marketing or promotional purposes.
+                    </p>
+                    <p className="text-primary">
+                      Do you agree to receive these SMS notifications?"
+                    </p>
+                  </blockquote>
+                </div>
+
+                <Alert className="border-primary/50 bg-primary/5">
+                  <CheckCircle className="h-5 w-5 text-primary" />
+                  <AlertDescription className="text-base">
+                    The caller's verbal "yes" response is recorded and stored with a timestamp. No SMS is sent without explicit, recorded consent. All opt-ins are auditable and can be verified upon request.
+                  </AlertDescription>
+                </Alert>
+
+                <div className="pt-4">
+                  <p className="text-muted-foreground mb-3">
+                    <strong className="text-foreground">Recording and Logging:</strong>
+                  </p>
+                  <p className="text-muted-foreground">
+                    All verbal consent interactions collected by our AI agent are recorded and logged for verification purposes in compliance with carrier standards. Each consent event includes caller identification, timestamp, and audio recording of the explicit "yes" response.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Your Action Items */}
       <section className="bg-muted/30 py-16 md:py-24">
         <div className="container mx-auto px-4 lg:px-8">
@@ -180,14 +252,35 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
                 </CardHeader>
                 <CardContent>
                   {item.examples && (
-                    <ul className="space-y-2">
-                      {item.examples.map((example, eIndex) => (
-                        <li key={eIndex} className="flex items-start">
-                          <span className="text-primary mr-2">•</span>
-                          {example}
-                        </li>
-                      ))}
-                    </ul>
+                    <>
+                      <ul className="space-y-2">
+                        {item.examples.map((example, eIndex) => (
+                          <li key={eIndex} className="flex items-start">
+                            <span className="text-primary mr-2">•</span>
+                            {example}
+                          </li>
+                        ))}
+                      </ul>
+                      {item.hasPublicLink && (
+                        <div className="mt-6 p-4 bg-accent/20 rounded-lg border-2 border-primary/30">
+                          <p className="mb-3">
+                            <strong>View our AI voice consent script:</strong>
+                          </p>
+                          <Button 
+                            size="lg" 
+                            variant="default"
+                            className="w-full sm:w-auto"
+                            onClick={() => window.open('#', '_blank')}
+                          >
+                            <FileText className="h-4 w-4 mr-2" />
+                            View AI Consent Script
+                          </Button>
+                          <p className="text-sm text-muted-foreground mt-3">
+                            Public link available for carrier verification. Replace '#' with your Google Drive or Dropbox URL (set to "anyone with the link can view").
+                          </p>
+                        </div>
+                      )}
+                    </>
                   )}
                   {item.formats && (
                     <ul className="space-y-2">
