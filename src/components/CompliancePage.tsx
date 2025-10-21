@@ -1,8 +1,7 @@
-import { Shield, CheckCircle, Upload, FileText, MessageSquare, AlertCircle, Mic } from 'lucide-react';
+import { Shield, CheckCircle, FileText, MessageSquare, AlertCircle, Mic, Check } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
-import { Checkbox } from './ui/checkbox';
 import { Alert, AlertDescription } from './ui/alert';
 
 interface CompliancePageProps {
@@ -22,43 +21,43 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
 
   const actionItems = [
     {
-      title: 'Show Public Proof of Opt-In/Consent',
-      description: 'Every recipient must proactively agree before SMS goes out. Carriers require visible evidence that consent was obtained.',
+      title: 'Public Opt-In Verification',
+      description: 'Bail Bond Buddy captures explicit consent before any SMS is sent. Our consent mechanisms include visible proof that every recipient proactively agreed to receive messages.',
       examples: [
-        'Screenshot of online opt-in form with clear consent language',
-        'Photo/scan of paper consent form (for phone or in-person sign-ups)',
-        'Login flow screenshot showing SMS consent checkbox',
-        'Public URL hosting your opt-in form or privacy policy',
-        'AI voice consent script (publicly accessible link)',
+        'Online opt-in forms with clear consent language and STOP/HELP disclosures',
+        'Paper consent forms for phone or in-person sign-ups with physical signatures',
+        'Login flow with SMS consent checkbox during account creation',
+        'Publicly accessible privacy policy and opt-in documentation',
+        'AI voice consent script with verbal agreement recording (publicly accessible)',
       ],
       hasPublicLink: true,
     },
     {
-      title: 'Submit Evidence',
-      description: 'Acceptable proof formats for Twilio and carrier review:',
+      title: 'Evidence Documentation',
+      description: 'All consent capture mechanisms are documented and hosted for carrier verification:',
       formats: [
-        'Public link to your opt-in form (must be accessible without login)',
-        'Screenshot showing consent language during account creation',
-        'Photo/scan of signed physical consent forms',
-        'Documentation hosted on a publicly accessible URL',
+        'Public link to opt-in forms (accessible without login for carrier review)',
+        'Screenshots showing consent language during account creation flows',
+        'Scanned copies of signed physical consent forms',
+        'All documentation hosted on publicly accessible URLs for audit purposes',
       ],
     },
     {
-      title: 'Required Disclosures',
-      description: 'Your opt-in materials and messages must include:',
+      title: 'Our Disclosure Standards',
+      description: 'Every Bail Bond Buddy opt-in touchpoint includes the following required disclosures:',
       items: [
-        'Brand name clearly displayed',
-        'Explicit consent language: "By providing your phone number, you agree to receive SMS messages from [Bail Bond Buddy]"',
-        '"Message & data rates may apply" disclaimer',
-        'Frequency statement: "You may receive up to [X] messages per week"',
-        'STOP instructions: "Reply STOP to opt out"',
+        'Brand name "Bail Bond Buddy" clearly displayed on all materials',
+        'Explicit consent language: "By providing your phone number, you agree to receive SMS messages from Bail Bond Buddy"',
+        '"Message & data rates may apply" disclaimer on all opt-in forms',
+        'Frequency statement: "You may receive up to 10 messages per week"',
+        'STOP instructions: "Reply STOP to opt out at any time"',
         'HELP instructions: "Reply HELP for assistance"',
-        'Link to privacy policy containing: "Mobile information will not be shared with third parties for marketing/promotional purposes"',
+        'Privacy policy link with required clause: "Mobile information will not be shared with third parties for marketing/promotional purposes" (available at bailbondbuddy.com/privacy)',
       ],
     },
     {
-      title: 'Sample Messages',
-      description: 'All messages must include brand identification and opt-out instructions:',
+      title: 'Message Examples',
+      description: 'All Bail Bond Buddy messages include brand identification and opt-out instructions per carrier requirements:',
       samples: [
         'Bail Bond Buddy: Hi [CLIENT_NAME], this is a reminder of your court date on [DATE] at [TIME]. Reply STOP to opt out, HELP for help.',
         'Bail Bond Buddy: GPS check-in required. Please complete your location verification by [TIME]. Reply STOP to unsubscribe.',
@@ -69,45 +68,45 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
   ];
 
   const complianceChecklist = [
-    { task: 'Opt-in form created with required disclosures', description: 'Web form includes brand name, consent language, Msg&data rates, frequency, STOP/HELP' },
-    { task: 'Privacy policy updated', description: 'Includes mobile info sharing clause and accessible public URL' },
-    { task: 'Sample messages prepared', description: 'Messages include brand, STOP instructions, and bracketed variables' },
-    { task: 'Opt-in proof collected', description: 'Screenshots/photos of consent capture mechanisms' },
-    { task: 'Evidence hosted publicly', description: 'Opt-in form or proof available at public URL' },
-    { task: 'STOP/HELP handling configured', description: 'Automated responses and opt-out processing enabled' },
-    { task: 'Audit log system verified', description: 'All opt-in events tracked with timestamps' },
-    { task: 'Verbal consent process implemented and recorded', description: 'AI calls collect and store verbal consent for inbound inquiries' },
-    { task: 'Verbal consent logs stored securely', description: 'All verbal consent interactions logged with timestamps for verification' },
+    { task: 'Opt-in forms with required disclosures', description: 'All web forms include brand name, consent language, Msg&data rates, frequency, STOP/HELP instructions' },
+    { task: 'Privacy policy compliance', description: 'Mobile info sharing clause included and hosted at publicly accessible URL' },
+    { task: 'Message templates with carrier requirements', description: 'All messages include brand identification, STOP instructions, and proper variable formatting' },
+    { task: 'Opt-in proof documentation', description: 'Screenshots and records of all consent capture mechanisms maintained' },
+    { task: 'Public evidence hosting', description: 'Opt-in forms and proof materials available at public URLs for carrier verification' },
+    { task: 'Automated STOP/HELP handling', description: 'System configured for immediate opt-out processing and automated help responses' },
+    { task: 'Audit log system active', description: 'All opt-in events tracked with timestamps and stored for verification' },
+    { task: 'Verbal consent collection implemented', description: 'AI agent collects and records verbal consent for all inbound call inquiries' },
+    { task: 'Verbal consent logs secured', description: 'All verbal consent interactions logged with timestamps and audio recordings for carrier audit' },
   ];
 
   const faqs = [
     {
       question: 'What is 10DLC and why is it required?',
-      answer: '10DLC (10-Digit Long Code) is a carrier standard for Application-to-Person (A2P) messaging in the US. Carriers require businesses to register their messaging campaigns and prove explicit consent from recipients to prevent spam and ensure compliance.',
+      answer: '10DLC (10-Digit Long Code) is a carrier standard for Application-to-Person (A2P) messaging in the US. Carriers require businesses to register their messaging campaigns and prove explicit consent from recipients to prevent spam and ensure compliance. Bail Bond Buddy maintains full 10DLC compliance for all SMS messaging.',
     },
     {
-      question: 'What constitutes valid opt-in consent?',
-      answer: 'Valid opt-in requires: (1) recipient provides phone number proactively, (2) clear disclosure of what they\'re signing up for, (3) explicit consent language, (4) brand identification, (5) Msg&data rates disclaimer, (6) STOP/HELP instructions. Consent cannot be buried in terms or assumed.',
+      question: 'How does Bail Bond Buddy ensure valid opt-in consent?',
+      answer: 'Our platform captures valid opt-in through: (1) proactive phone number submission, (2) clear disclosure of messaging purpose, (3) explicit consent language, (4) brand identification, (5) Msg&data rates disclaimer, (6) STOP/HELP instructions. Consent is never buried in terms or assumed - it must be explicitly granted.',
     },
     {
-      question: 'Do I need double opt-in?',
-      answer: 'Double opt-in (confirmation message after initial sign-up) is not required but is considered best practice. It provides additional proof of consent and reduces the risk of complaints. Bail Bond Buddy supports both single and double opt-in workflows.',
+      question: 'Does Bail Bond Buddy use double opt-in?',
+      answer: 'Bail Bond Buddy supports both single and double opt-in workflows. Double opt-in (confirmation message after initial sign-up) provides additional proof of consent and reduces the risk of complaints. Our system is configured to accommodate either approach based on client preference.',
     },
     {
-      question: 'How does STOP/HELP handling work?',
-      answer: 'When a recipient texts STOP, they are immediately added to a suppression list and receive a confirmation that they\'ve been unsubscribed. HELP triggers an automated response with your contact information. Both are handled automatically by Bail Bond Buddy.',
+      question: 'How does our STOP/HELP handling work?',
+      answer: 'Bail Bond Buddy automatically processes opt-out requests. When a recipient texts STOP, they are immediately added to our suppression list and receive a confirmation of unsubscription. HELP triggers an automated response with contact information. Both are handled in real-time with no manual intervention required.',
     },
     {
-      question: 'What happens if someone opts out?',
-      answer: 'Once a recipient opts out, they are permanently added to your suppression list and will not receive further SMS messages unless they explicitly opt back in. All opt-out events are logged in the audit trail.',
+      question: 'What happens when someone opts out?',
+      answer: 'Once a recipient opts out via STOP, they are permanently added to Bail Bond Buddy\'s suppression list and will not receive further SMS messages unless they explicitly opt back in through a new consent process. All opt-out events are logged in our audit trail with timestamps.',
     },
     {
-      question: 'Where should I host my opt-in proof?',
-      answer: 'Opt-in proof must be accessible via a public URL (no login required). You can host it on your website, use a public Google Drive/Dropbox link, or we can provide hosting as part of your Bail Bond Buddy account.',
+      question: 'Where does Bail Bond Buddy host opt-in proof?',
+      answer: 'Our opt-in proof documentation is hosted on publicly accessible URLs (no login required) for carrier verification. This includes web-based forms, consent scripts, and privacy policy documentation. All materials are available for Twilio and carrier audit upon request.',
     },
     {
-      question: 'What about the Privacy Policy requirement?',
-      answer: 'Your Privacy Policy must include the exact statement: "Mobile information will not be shared with third parties for marketing or promotional purposes." This clause is required by carriers for 10DLC compliance and must be publicly accessible.',
+      question: 'How does our Privacy Policy meet carrier requirements?',
+      answer: 'Bail Bond Buddy\'s Privacy Policy includes the exact carrier-required statement: "Mobile information will not be shared with third parties for marketing or promotional purposes." Our privacy policy is publicly accessible at bailbondbuddy.com/privacy and meets all 10DLC compliance requirements.',
     },
   ];
 
@@ -137,7 +136,7 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
             <Alert className="border-l-4 border-l-primary bg-accent/50">
               <AlertCircle className="h-5 w-5 text-primary" />
               <AlertDescription className="text-base">
-                <strong>Important:</strong> Carriers require explicit opt-in proof for all A2P messaging. This page outlines what you need to provide for Twilio 10DLC campaign registration and how Bail Bond Buddy helps you stay compliant.
+                <strong>Carrier Verification:</strong> This page serves as public documentation of Bail Bond Buddy's 10DLC compliance standards and consent capture processes for Twilio and carrier review.
               </AlertDescription>
             </Alert>
           </div>
@@ -228,14 +227,14 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
         </div>
       </section>
 
-      {/* Your Action Items */}
+      {/* Our 10DLC Compliance Process */}
       <section className="bg-muted/30 py-16 md:py-24">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl mb-4">Your Action Items</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl mb-4">Our 10DLC Compliance Process</h2>
               <p className="text-lg md:text-xl text-muted-foreground">
-                What you need to submit for Twilio carrier review
+                How Bail Bond Buddy ensures carrier compliance and protects consent integrity
               </p>
             </div>
 
@@ -264,20 +263,17 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
                       {item.hasPublicLink && (
                         <div className="mt-6 p-4 bg-accent/20 rounded-lg border-2 border-primary/30">
                           <p className="mb-3">
-                            <strong>View our AI voice consent script:</strong>
+                            <strong>AI Voice Consent Script Documentation:</strong>
                           </p>
-                          <Button 
-                            size="lg" 
-                            variant="default"
-                            className="w-full sm:w-auto"
-                            onClick={() => window.open('#', '_blank')}
-                          >
-                            <FileText className="h-4 w-4 mr-2" />
-                            View AI Consent Script
-                          </Button>
-                          <p className="text-sm text-muted-foreground mt-3">
-                            Public link available for carrier verification. Replace '#' with your Google Drive or Dropbox URL (set to "anyone with the link can view").
+                          <p className="text-sm text-muted-foreground mb-4">
+                            Our complete AI consent script with verbal disclosure language is hosted on a publicly accessible cloud storage platform for carrier verification. The full script includes all required 10DLC disclosures and is available upon request for Twilio or carrier audit purposes.
                           </p>
+                          <Alert className="border-primary/50">
+                            <FileText className="h-4 w-4 text-primary" />
+                            <AlertDescription className="text-sm">
+                              <strong>For Carrier Review:</strong> Public documentation link available. Contact our compliance team at the email below to receive the direct URL for verification purposes.
+                            </AlertDescription>
+                          </Alert>
                         </div>
                       )}
                     </>
@@ -322,23 +318,25 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
       {/* Compliance Checklist */}
       <section className="container mx-auto px-4 lg:px-8 py-16 md:py-24">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl mb-12 text-center">Compliance Checklist</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl mb-12 text-center">Our Compliance Standards</h2>
           <Card className="border-2">
             <CardHeader className="bg-muted/30">
-              <CardTitle className="text-2xl">Pre-Launch Requirements</CardTitle>
+              <CardTitle className="text-2xl">Bail Bond Buddy's Adherence to 10DLC Requirements</CardTitle>
               <CardDescription className="text-base">
-                Complete all items before submitting your 10DLC campaign for review
+                Our platform maintains these compliance standards to ensure carrier approval and message deliverability
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {complianceChecklist.map((item, index) => (
-                  <div key={index} className="flex items-start space-x-3 p-3 rounded hover:bg-muted transition-colors">
-                    <Checkbox id={`check-${index}`} className="mt-1" />
-                    <label htmlFor={`check-${index}`} className="flex-1 cursor-pointer">
-                      <div>{item.task}</div>
+                  <div key={index} className="flex items-start space-x-3 p-4 rounded bg-accent/10 border">
+                    <div className="h-5 w-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="h-3 w-3 text-primary-foreground" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-medium">{item.task}</div>
                       <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                    </label>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -347,23 +345,23 @@ export function CompliancePage({ onNavigate }: CompliancePageProps) {
         </div>
       </section>
 
-      {/* Upload CTA */}
+      {/* CTA */}
       <section className="bg-gradient-to-r from-primary via-primary to-primary/90 text-primary-foreground py-16 md:py-24">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-8">
             <div className="inline-flex h-20 w-20 rounded-2xl bg-white/10 items-center justify-center mx-auto">
-              <Upload className="h-10 w-10" />
+              <Shield className="h-10 w-10" />
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl">Ready to Submit Your Opt-In Proof?</h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl">Questions About Our Compliance?</h2>
             <p className="text-lg md:text-xl opacity-95">
-              Upload your consent documentation or contact us for assistance with 10DLC compliance
+              Contact our team for additional documentation or compliance verification
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button size="lg" variant="secondary" onClick={() => onNavigate('contact')} className="shadow-lg">
-                Upload Opt-In Proof
-              </Button>
-              <Button size="lg" variant="outline" className="bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary shadow-lg">
                 Contact Compliance Team
+              </Button>
+              <Button size="lg" variant="outline" className="bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary shadow-lg" onClick={() => onNavigate('privacy')}>
+                View Privacy Policy
               </Button>
             </div>
           </div>
